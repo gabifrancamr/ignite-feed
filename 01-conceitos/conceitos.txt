@@ -20,3 +20,30 @@ Padrões de renderização: SPA = Single Page Application, SSR = Server Side Ren
 3 - CSS Modules
 - CSS Modules são arquivos css especiais, com nome no formato “.module.css” e que podem ser importados como módulos dentro do JavaScript. A partir daí podemos usá-los como um objeto javascript no nosso código.
 - Usando os CSS Modules conseguimos separar a estilização do resto do componente, deixando nosso código bem mais organizado, porém sem perder as vantagens de interagir com os estilos usando JavaScript de forma facilitada.
+
+4 - Hooks 
+- São funções específicas do React para “entrar” ou se conectar ao seu sistema interno. Além disso, o React segue o padrão de nomear os hooks sempre com o prefixo “use”, por exemplo, “useState”, “useRef”, “useEffect”, “useMemo”, etc.
+- você só pode chamar um hook em uma função que é um componente React, 
+- você não pode chamar hooks em funções comuns do JavaScript.
+- Você pode criar seus próprios hooks seguindo o padrão de nomenclatura e retornar valores. O seu hook será uma função, mas que você também só deverá chamar dentro de um componente React.
+- Uma prática comum no React é criar hooks customizados para abstrair certos comportamentos e lógicas fora do componente, o que resulta em uma estrutura muito mais organizada.
+- A importância da ordem dos hooks
+ - 1. O React monitora os hooks através de uma lista, ele não sabe o nome que demos para eles ou onde e como estamos trabalhando com eles. Por isso, a ordem em que usamos os hooks no componente importa (e muito). O que nos leva à segunda regra.
+ - 2. A segunda regra é que você só pode chamar um hook no top-level da função, nunca deverá chamar os hooks dentro de blocos condicionais, repetições ou outros funções criadas dentro do componente.
+ - 3. Por causa da forma como o React lida com os hooks é necessário que a ordem e a quantidade dos hooks em um componente sejam sempre as mesmas. Se tentarmos colocar o hook dentro de uma condicional veremos que isso causará vários erros
+
+5 - useState
+-  Esse recurso nos permite ter informações na tela que são renderizadas e atualizadas dinamicamente de acordo com a mudança dos nossos valores no JavaScript. O state, ou estado, é o recurso do React usado para refletir as nossas mudanças virtuais no DOM real. Quando criamos um state, o React nos dá acesso a duas coisas: uma variável imutável que contém o seu valor atual e uma função que serve para mudar o valor da variável. Para usar o state só precisamos utilizar a função “useState”. Ela ainda aceita como parâmetro o valor inicial, caso queiramos defini-lo. Repare que o state é uma tupla (array de tamanho fixo) de dois elementos, o valor e o modificador. O React trabalha dessa forma para que possamos renomear esses elementos através de desestruturação.  
+    - Obs.: uma convenção importante para se atentar aqui é o prefixo “set” + o nome da variável para a função modificadora, você pode usar o nome que quiser, mas a comunidade React inteira segue essa convenção.
+- A função modificadora “setState” irá acionar os mecanismos internos do React para causar uma nova renderização do componente. Nessa nova renderização o valor da variável estará atualizado com o que informamos e o resultado é que as nossas mudanças virtuais refletem no DOM real. Tudo isso de uma forma bem simples e intuitiva.
+- Resumo: serve para se conectar ao sistema de estado do React. Esse sistema serve para monitorar valores específicos que, ao serem alterados, devem acionar uma remontagem de um componente.
+
+6 - Conhecendo melhor o useState
+- podemos usar uma função para definir o valor inicial do useState: useState(getInitialValue())
+- Mas isso apresenta um problema, como podemos ver no console, que é o fato da função ser executada em cada montagem. Para resolver isso só precisamos envolver a chamada da função em uma função anônima:
+    - Obs.: isso acontece porque, dessa forma, estamos passando a definição de uma função, não o resultado dela, e o useState sabe que precisará executar essa função internamente e apenas na primeira montagem. 
+    - Obs².: essa técnica é muito útil quando o nosso estado inicial depende de um cálculo, especialmente um cálculo que “custa caro” em termos computacionais.
+    - useState(() => getInitialValue())
+- A segunda dica é relacionada a função de setState. Quando vamos usá-la para definir um novo valor que depende do valor anterior não podemos apenas colocar a expressão diretamente no parâmetro. Podemos ver o problema que isso causa quando chamamos o setState mais de uma vez ao mesmo tempo: setCount(count + 1)  setCount(count + 1)
+- A solução para isso é bem fácil. O setState aceita como parâmetro uma função de callback cujo primeiro argumento é o valor “imediatamente” anterior, o que nos permite ter acesso a esse valor sempre atualizado. O retorno desse callback deve ser o valor que queremos “setar” no estado: setCount((previousCount) => previousCount + 1)
+    setCount((previousCount) => previousCount + 1)
