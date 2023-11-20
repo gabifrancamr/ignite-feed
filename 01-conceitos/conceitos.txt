@@ -1,0 +1,22 @@
+Interface = tudo que o usuário interage quando está utilizando a aplicação, tanto na web, movel, TV, realidade virtual. Enão o React controla interfaces de usuário
+Padrões de renderização: SPA = Single Page Application, SSR = Server Side Rendering
+
+1 - Conhecendo os Componentes do React
+- Componentes são os pequenos blocos que compõem uma interface que podem ser repetidos. Inclusive com informações diferentes
+- Diferente do HTML tradicional, onde escrevemos a página inteira em um arquivo, componentes definem pequenos blocos reutilizáveis e extensíveis
+- Componente é uma função que retorna HTML (JSX (JS + XML), TSX (TS + XML))
+- Vantagens
+    - Podem ser escritos uma vez e reutilizados várias vezes facilmente
+    - Tornam o processo de modificar uma parte específica da interface muito mais fácil (ex.: mudar o componente de botão atualiza todos os botões da interface)
+    - Deixa a estrutura de um projeto mais organizada, com cada arquivo responsável por uma pequena parte ao invés de toda uma página
+- Qual a diferença entre export default e export? Com export o nome da função e o nome da importação tem que ser iguais, assim evita possíveis erros. Export default é usado para exportar um valor ou função como exportação padrão do módulo, enquanto export é usado para exportar múltiplos valores ou funções.
+
+2 - Propriedades
+- São informações que podem ser passadas aos componentes. Elas nos permitem passar argumentos para os nossos componentes, tornando-os mais flexíveis e dinâmicos, o que facilita a sua reutilização.
+- props:  representa um objeto contendo todas os atributos passados na declaração do componente no JSX, ou seja, assim como passamos atributos para elementos padrão do html nossos componentes serão capazes de aceitar atributos, cujos valores poderão ser usados dentro do componente
+- Quando queremos usar uma variável JS dentro do HTML, precisamos usar chaves por volta: {props}. O JSX permite inserir qualquer expressão JavaScript dentro da marcação, em qualquer lugar. Para fazer isso basta usar um par de chaves “{ }”. Por exemplo, podemos exibir de forma dinâmica o valor de uma variável
+- No entanto, existe uma regra muito importante aqui. Só podemos usar expressões dentro do JSX, ou seja, código que pode ser avaliado para resultar em um valor (como os valores que atribuímos a uma variável por exemplo). Sendo assim, coisas como blocos if else, while, for, etc, não podem ser usados dentro do JSX. Podemos, por exemplo, substituir o if else por um operador ternário
+
+3 - CSS Modules
+- CSS Modules são arquivos css especiais, com nome no formato “.module.css” e que podem ser importados como módulos dentro do JavaScript. A partir daí podemos usá-los como um objeto javascript no nosso código.
+- Usando os CSS Modules conseguimos separar a estilização do resto do componente, deixando nosso código bem mais organizado, porém sem perder as vantagens de interagir com os estilos usando JavaScript de forma facilitada.
